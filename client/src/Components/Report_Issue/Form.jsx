@@ -11,8 +11,12 @@ import { Email } from '@material-ui/icons';
 import ReactMapGL from "react-map-gl";
 import './form.css';
 import MarkerItem from '../Map/Markers';
+import axios from 'axios';
+
 
 const Form = () => {
+
+
   const history = useHistory();
   const [formData, setFormData] = useState({
     title: "",
@@ -36,6 +40,18 @@ const Form = () => {
     triedDescription,
   } = formData;
 
+  const uploadFile = async (fileData) => {
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+    const formData = new FormData();
+    formData.append("image", fileData);
+    const result = await axios.post("/api/upload", formData, config);
+    //url for image is in result.data
+    //need to add it to the object when uploading post to the db
+  };
  
   const titleTried = () => {
     setFormData({ ...formData, triedTitle: true });
@@ -83,7 +99,6 @@ const Form = () => {
 
 
   }
-
 
     return (
         <div className="Modal">
@@ -134,8 +149,19 @@ const Form = () => {
 
             </div>
 
+            <br/>
+            
+            <div className="Buttons">
+
             <ThemeProvider theme={myTheme}>
-              <span
+            <input
+              id="input"
+              name="image"
+              type="file"
+              hidden
+              onChange={(result) => uploadFile(result.target.files[0])}
+            />
+            <span
                 onClick={() => global.document.getElementById("input").click()}
               >
                 <Button
@@ -147,17 +173,6 @@ const Form = () => {
                   Upload Image
                 </Button>
               </span>
-            </ThemeProvider>
-
-            {"              "}
-            <br/>
-            
-            <div classNasme="Buttons">
-
-            <ThemeProvider theme={myTheme}>
-                  <Button variant="contained" color="primary" type="submit" id="upload">
-                    Upload Image
-                  </Button>
                 </ThemeProvider>
 
                 {"     "}
