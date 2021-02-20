@@ -8,7 +8,7 @@ import Box from "@material-ui/core/Box";
 
 export default function Form() {
     return (
-        <div id="formHolder">
+        <div className="overlayHolder">
             <Card id="reportCard">
                 <Typography variant="h4" style={{fontFamily: 'Patua One'}}>
                     Report An Issue:
