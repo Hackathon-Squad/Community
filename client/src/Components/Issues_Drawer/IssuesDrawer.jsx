@@ -8,6 +8,7 @@ import DrawerElem from './DrawerElem';
 import '../../App.css';
 import { useEffect } from 'react';
 import axios from "axios";
+import './issuedrawer.css';
 
 const useStyles = makeStyles((theme) => ({
   drawerPaper: {

@@ -2,15 +2,6 @@
   display: flex;
 }
 
-.IssuesDrawer {
-  width: 350px;
-}
-
-.drawerElement {
-  display: flex;
-  flex-direction: column;
-}
-
 hr.dividerColor {
   border-top: 1px solid green;
 }
@@ -21,42 +12,14 @@ hr.dividerColor {
   width: 0;
 }
 
-#reportCard {
-  position: absolute;
-  padding: 20px;
-  left: -100vh;
-  margin: 30px;
-  border-radius: 8px;
-  border-style: solid;
-  border-color: #89D94A;
-  white-space: pre-wrap;
-}
-
-#newIssueButton {
-  position: absolute;
-  padding: 20px;
-  left: -250px;
-  top: 75vh;
-  margin: 30px;
-}
-
-#doneReportingButton {
-  position: absolute;
-  padding: 20px;
-  left: -250px;
-  top: 75vh;
-  margin: 30px;
-}
-
 #imgDiv {
   background-color: #89D94A;
 }
 
-
 #thumbsUp {
   float: right;
   display: flex;
-  alignItems:'right';
+  align-items:'right';
   justify-content: flex-end;
 }
 
