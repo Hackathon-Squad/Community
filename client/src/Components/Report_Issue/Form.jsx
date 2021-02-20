@@ -135,7 +135,6 @@ const Form = () => {
 
             </div>
 
-<<<<<<< HEAD
             <ThemeProvider theme={myTheme}>
               <span
                 onClick={() => global.document.getElementById("input").click()}
@@ -152,7 +151,6 @@ const Form = () => {
             </ThemeProvider>
 
             {"              "}
-=======
             <br/>
             
             <div classNasme="Buttons">
@@ -162,7 +160,6 @@ const Form = () => {
                     Upload Image
                   </Button>
                 </ThemeProvider>
->>>>>>> ef6ef12 (markers and form)
 
                 {"     "}
                 
@@ -189,12 +186,9 @@ const Form = () => {
 export default Form;
 
 
-<<<<<<< HEAD
 {/* <ReactMapGL
           {...viewport}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
           mapStyle="mapbox://styles/mapbox/streets-v11"
           onViewportChange={(nextViewport) => setViewport(nextViewport)}
           /> */}
-=======
->>>>>>> ef6ef12 (markers and form)
