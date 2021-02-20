@@ -5,6 +5,10 @@ import { Typography } from '@material-ui/core';
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Box from "@material-ui/core/Box";
+import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import {green, blue} from '@material-ui/core/colors';
+import myTheme from './MyTheme';
+
 
 export default function Form() {
     return (
@@ -42,14 +46,26 @@ export default function Form() {
                     fullWidth={true}
                   />
                 </Box>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  type="submit"
-                  id="next"
-                >
-                  Next
-                </Button>
+
+                <ThemeProvider theme={myTheme}>
+                  <Button variant="contained" color="primary" type="submit" id="upload">
+                    Upload Image
+                  </Button>
+                </ThemeProvider>
+
+                {"              "}
+
+                <ThemeProvider theme={myTheme}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    type="submit"
+                    id="next"
+                  >
+                    Next
+                  </Button>
+                </ThemeProvider>
+
               </div>
             </form>
             </Card>
