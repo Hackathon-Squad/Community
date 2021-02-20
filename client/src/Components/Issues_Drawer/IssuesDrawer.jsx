@@ -28,7 +28,7 @@ export default function IssuesDrawer() {
     const loadEvents = async () => {
       const result = await axios.get("/api/posts");
       setIssuesData(result.data);
-      console.log(result.data);
+      result.data.sort((a,b) => b.upvotes - a.upvotes);
     }
     useEffect(() => {
       loadEvents();
@@ -40,6 +40,7 @@ export default function IssuesDrawer() {
     })
     const updateFilter = (e) => {
       setFilter({...filter, type: e.target.value});
+      setIssuesData([...issuesData].sort((a,b) => b.upvotes - a.upvotes));
     }
     return (
         <Drawer
