@@ -26,13 +26,20 @@
   border-style: solid;
   border-color: #89D94A;
   white-space: pre-wrap;
-
 }
 
 #newIssueButton {
   position: absolute;
   padding: 20px;
-  left: -30vh;
+  left: -250px;
+  top: 75vh;
+  margin: 30px;
+}
+
+#doneReportingButton {
+  position: absolute;
+  padding: 20px;
+  left: -250px;
   top: 75vh;
   margin: 30px;
 }

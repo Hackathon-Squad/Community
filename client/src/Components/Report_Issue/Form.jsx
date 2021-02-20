@@ -5,19 +5,20 @@ import { Typography } from '@material-ui/core';
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Box from "@material-ui/core/Box";
-import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import {green, blue} from '@material-ui/core/colors';
+import { ThemeProvider } from '@material-ui/core/styles';
 import myTheme from './MyTheme';
-
+import {useHistory} from 'react-router-dom';
 
 export default function Form() {
+  const history = useHistory();
+  const handleOnClick = () => history.push('/form2');
     return (
         <div className="overlayHolder">
             <Card id="reportCard">
                 <Typography variant="h4" style={{fontFamily: 'Patua One'}}>
                     Report An Issue:
                 </Typography>
-                <form noValidate autoComplete="off">
+                <form noValidate autoComplete="off" onSubmit={handleOnClick}>
               <div id="form-inputs">
                 <Box pb={1.87} width="100%">
                   <TextField
