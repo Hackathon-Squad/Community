@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.IssuesDrawer {
+  width: 350px;
+}
+
 .drawerElement {
   display: flex;
   flex-direction: column;
