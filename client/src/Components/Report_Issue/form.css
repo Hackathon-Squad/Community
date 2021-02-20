@@ -1,0 +1,16 @@
+.Map {
+    flex-grow: 2;
+}
+
+.Form{
+    float: left;
+}
+
+.Modal {
+    max-height: 80vh;
+    max-width: 80vw; 
+    padding: 1rem;
+    display: flex;
+    justify-content:center;
+    align-items: center; 
+}
