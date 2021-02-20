@@ -1,3 +1,5 @@
+@import "../../App.css";
+
 .Map {
     flex-grow: 2;
 }
@@ -13,4 +15,20 @@
     display: flex;
     justify-content:center;
     align-items: center; 
+}
+
+#newIssueButton {
+    position: absolute;
+    padding: 20px;
+    left: -250px;
+    top: 75vh;
+    margin: 30px;
+}
+
+#doneReportingButton {
+    position: absolute;
+    padding: 20px;
+    left: -250px;
+    top: 75vh;
+    margin: 30px;
 }

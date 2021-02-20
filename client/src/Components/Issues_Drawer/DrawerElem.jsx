@@ -1,7 +1,7 @@
 import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import '../../App.css';
+import './issuedrawer.css';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import IconButton from '@material-ui/core/IconButton';
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import '../../App.css';
 import Modal from "@material-ui/core/Modal";
 import Form from './Form';
+import './form.css';
 
 const CardModal = (props) => {
 

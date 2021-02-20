@@ -2,7 +2,6 @@
   display: flex;
 }
 
-<<<<<<< HEAD
 .IssuesDrawer {
   width: 350px;
 }
@@ -11,8 +10,6 @@
   display: flex;
   flex-direction: column;
 }
-=======
->>>>>>> 8f067e7 (update css)
 
 hr.dividerColor {
   border-top: 1px solid green;
@@ -35,26 +32,10 @@ hr.dividerColor {
   white-space: pre-wrap;
 }  */
 
-#newIssueButton {
-  position: absolute;
-  padding: 20px;
-  left: -250px;
-  top: 75vh;
-  margin: 30px;
-}
-
-#doneReportingButton {
-  position: absolute;
-  padding: 20px;
-  left: -250px;
-  top: 75vh;
-  margin: 30px;
-}
 
 #imgDiv {
   background-color: #89D94A;
 }
-
 
 #thumbsUp {
   float: right;

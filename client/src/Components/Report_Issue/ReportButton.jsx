@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import myTheme from './MyTheme';
 import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import CardModal from './Modal';
+import './form.css';
 
 const ReportButton = () => {
 

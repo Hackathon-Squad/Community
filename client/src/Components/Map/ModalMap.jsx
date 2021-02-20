@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ReactMapGL from "react-map-gl";
 
+
 const Map = () => {
     const [viewport, setViewport] = useState({
       width: "100vw",

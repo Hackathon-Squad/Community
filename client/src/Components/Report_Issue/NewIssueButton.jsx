@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
-import '../../App.css';
+import './form.css';
 import { Typography } from '@material-ui/core';
 import myTheme from './MyTheme';
 import { ThemeProvider } from '@material-ui/core/styles';

@@ -2,6 +2,7 @@ import { Marker } from 'react-map-gl';
 import axios from 'axios';
 import React, { useState } from 'react';
 
+
 const MarkerItem = (props) => {
 
     const [drag, setDrag] = useState({
