@@ -2,15 +2,6 @@
   display: flex;
 }
 
-.IssuesDrawer {
-  width: 350px;
-}
-
-.drawerElement {
-  display: flex;
-  flex-direction: column;
-}
-
 hr.dividerColor {
   border-top: 1px solid green;
 }
@@ -20,9 +11,6 @@ hr.dividerColor {
   background-color: rgba(0,0,0,0);
   width: 0;
 }
- 
-
-
 
 #imgDiv {
   background-color: #89D94A;
@@ -31,7 +19,7 @@ hr.dividerColor {
 #thumbsUp {
   float: right;
   display: flex;
-  alignItems:'right';
+  align-items:'right';
   justify-content: flex-end;
 }
 
