@@ -2,19 +2,32 @@
   display: flex;
 }
 
+.IssuesDrawer {
+  width: 350px;
+}
+
 .drawerElement {
   display: flex;
   flex-direction: column;
 }
 
-#formHolder {
+.overlayHolder {
   position: relative;
   background-color: rgba(0,0,0,0);
+  width: 0;
 }
 
 #reportCard {
   position: absolute;
   padding: 20px;
   left: -100vh;
+  margin: 30px;
+}
+
+#newIssueButton {
+  position: absolute;
+  padding: 20px;
+  left: -30vh;
+  top: 75vh;
   margin: 30px;
 }
