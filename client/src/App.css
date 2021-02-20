@@ -9,7 +9,6 @@
 .drawerElement {
   display: flex;
   flex-direction: column;
-
 }
 
 hr.dividerColor {
@@ -55,7 +54,6 @@ hr.dividerColor {
 
 
 #thumbsUp {
-
   float: right;
   display: flex;
   alignItems:'right';

@@ -6,6 +6,8 @@ import Divider from '@material-ui/core/Divider';
 import rectLogo from '../../graphics/logo_rect.png';
 import DrawerElem from './DrawerElem';
 import '../../App.css';
+import { useEffect } from 'react';
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   drawerPaper: {
@@ -15,58 +17,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function IssuesDrawer() {
     const classes = useStyles();
-    const [issuesData, setIssuesData] = useState({
-      issues: [
-        {
-          title: "Tree Collapse 1",
-          location: "Filbert St. 1",
-          likes: 1,
-          type: "public disturbance",
-        },
-        {
-          title: "Tree Collapse 2",
-          location: "Filbert St. 2",
-          likes: 3,
-          type: "traffic accident",
-        },
-        {
-          title: "Tree Collapse 3",
-          location: "Filbert St. 3",
-          likes: 1,
-          type: "criminal activity",
-        },
-        {
-          title: "Tree Collapse 4",
-          location: "Filbert St. 4",
-          likes: 4,
-          type: "public disturbance",
-        },
-        {
-          title: "Tree Collapse 5",
-          location: "Filbert St. 5",
-          likes: 2,
-          type: "traffic accident",
-        },
-        {
-          title: "Tree Collapse 6",
-          location: "Filbert St. 6",
-          likes: 5,
-          type: "public disturbance",
-        },
-        {
-          title: "Tree Collapse 6",
-          location: "Filbert St. 6",
-          likes: 2,
-          type: "criminal activity",
-        },
-        {
-          title: "Tree Collapse 6",
-          location: "Filbert St. 6",
-          likes: 1,
-          type: "power outage",
-        },
-      ]
-    })
+    const loadEvents = async () => {
+      const result = await axios.get("/api/posts");
+      setIssuesData(result.data);
+      console.log(result.data);
+    }
+    useEffect(() => {
+      loadEvents();
+    },
+    []);
+    const [issuesData, setIssuesData] = useState(null)
     return (
         <Drawer
         className="IssuesDrawer"
@@ -75,7 +35,7 @@ export default function IssuesDrawer() {
           paper: classes.drawerPaper,
         }}
         anchor="left"
-      >
+        >
         <div className="IssuesToolbar"/>
         <div id="imgDiv" style={{textAlign: 'center'}}>
         <img 
@@ -85,14 +45,12 @@ export default function IssuesDrawer() {
         </div>
         <Divider />
         <List>
-        {issuesData.issues.map(item => ( item.likes > 1 ?
+        {issuesData != null ? issuesData.map(item => (
           <div>
-          <DrawerElem title={item.title} location={item.location} likes={item.likes} type={item.type}/>
+          <DrawerElem title={item.title} likes={item.upvotes} type={item.type}/>
           <hr class="dividerColor" />
           </div>
-          :
-          <div></div>
-        ))}
+        )) : <div></div>}
         </List>
       </Drawer>
     );
