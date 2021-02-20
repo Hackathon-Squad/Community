@@ -9,7 +9,6 @@ import myTheme from './MyTheme';
 import {useHistory} from 'react-router-dom';
 import { Email } from '@material-ui/icons';
 import ReactMapGL from "react-map-gl";
-import Paper from "@material-ui/core/Paper"
 import './form.css';
 import MarkerItem from '../Map/Markers';
 
