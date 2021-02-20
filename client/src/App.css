@@ -1,0 +1,20 @@
+.root {
+  display: flex;
+}
+
+.drawerElement {
+  display: flex;
+  flex-direction: column;
+}
+
+#formHolder {
+  position: relative;
+  background-color: rgba(0,0,0,0);
+}
+
+#reportCard {
+  position: absolute;
+  padding: 20px;
+  left: -100vh;
+  margin: 30px;
+}
