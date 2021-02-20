@@ -81,7 +81,7 @@ export default function IssuesDrawer() {
         <List>
         {issuesData.issues.map(item => ( item.likes > 1 ?
           <div>
-          <DrawerElem title={item.title} lcoation={item.location} likes={item.likes}/>
+          <DrawerElem title={item.title} location={item.location} likes={item.likes}/>
           <Divider />
           </div>
           :
