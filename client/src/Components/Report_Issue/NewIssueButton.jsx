@@ -12,8 +12,6 @@ import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material
 export default function NewIssueButton({title,location, likes}) {
     return (
         <div className="overlayHolder">
-
-
                 <ThemeProvider theme={myTheme}>
                     <Button variant="contained" color="secondary" id="newIssueButton" component={Link} to={'/form1'}>
                         <Typography variant="h6" style={{fontFamily: 'Patua One'}}>
@@ -21,8 +19,6 @@ export default function NewIssueButton({title,location, likes}) {
                         </Typography>
                     </Button>
                 </ThemeProvider>
-
-
         </div>
     );
 }
