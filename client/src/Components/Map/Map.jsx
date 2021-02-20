@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
-import ReactMapGL, { Marker } from "react-map-gl";
+import * as React from 'react';
+import { useState, useEffect } from 'react';
+import ReactMapGL, { Marker, FlyToInterpolator } from "react-map-gl";
 import axios from 'axios';
 import img from '../../graphics/redpin.svg';
+import * as d3 from "d3";
 
 const Map = () => {
   const [viewport, setViewport] = useState({
@@ -22,6 +24,17 @@ const Map = () => {
     setMarkers(result.data);
   }
 
+  const handleClick = (e) => {
+    setViewport({
+      ...viewport,
+      longitude: e.longitude,
+      latitude: e.latitude,
+      zoom: 16,
+      transitionDuration: 2000,
+      transitionInterpolator: new FlyToInterpolator(),
+      transitionEasing: d3.easeCubicInOut
+    });
+  }
 
   return (
     <ReactMapGL
@@ -36,7 +49,7 @@ const Map = () => {
       markers.map(
         city => (
           
-        <Marker longitude={city.coordinates.longitude} latitude={city.coordinates.latitude}>
+        <Marker longitude={city.coordinates.longitude} latitude={city.coordinates.latitude} onClick={() => handleClick(city.coordinates)}>
           <img src={img} />
         </Marker>
         
