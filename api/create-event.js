@@ -8,6 +8,7 @@ router.post("/", async (req, res) => {
     await doc.set(req.body);
   } catch (error) {
     console.error(error);
+    res.status(500).send("There was an error");
   }
   res.status(200).send("Added Post");
 });
