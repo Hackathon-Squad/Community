@@ -9,6 +9,11 @@
 .drawerElement {
   display: flex;
   flex-direction: column;
+
+}
+
+hr.dividerColor {
+  border-top: 1px solid green;
 }
 
 .overlayHolder {
@@ -48,6 +53,14 @@
   background-color: #89D94A;
 }
 
+
+#thumbsUp {
+
+  float: right;
+  display: flex;
+  alignItems:'right';
+  justify-content: flex-end;
+}
 
 
 
