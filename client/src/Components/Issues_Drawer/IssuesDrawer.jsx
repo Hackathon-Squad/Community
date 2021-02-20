@@ -8,39 +8,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 import rectLogo from '../../graphics/logo_rect.png';
 import '../../App.css';
 
-const drawerWidth = 350;
-
-const useStyles = makeStyles((theme) => ({
-  appBar: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: theme.spacing(3),
-  },
-}));
-
 export default function IssuesDrawer() {
-
   const classes = useStyles();
     return (
         <Drawer
         className="IssuesDrawer"
         variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
+        style={{width:350}}
         anchor="left"
       >
         <div className="IssuesToolbar"/>
