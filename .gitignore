@@ -1,5 +1,5 @@
 config.env
-community.json
+/community.json
 # Logs
 logs
 *.log
