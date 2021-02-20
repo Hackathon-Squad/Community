@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-// import '../../App.css';
 import Card from '@material-ui/core/Card';
 import { Typography } from '@material-ui/core';
 import Button from "@material-ui/core/Button";
@@ -10,8 +9,9 @@ import myTheme from './MyTheme';
 import {useHistory} from 'react-router-dom';
 import { Email } from '@material-ui/icons';
 import ReactMapGL from "react-map-gl";
-import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline';
+import Paper from "@material-ui/core/Paper"
 import './form.css';
+import MarkerItem from '../Map/Markers';
 
 const Form = () => {
   const history = useHistory();
@@ -23,8 +23,8 @@ const Form = () => {
   });
 
   const [viewport, setViewport] = useState({
-    width: "80vw",
-    height: "80vh",
+    width: "50vw",
+    height: "50vh",
     latitude: 32.8801,
     longitude: -117.234,
     zoom: 12,
@@ -63,13 +63,33 @@ const Form = () => {
     } else {
       setFormData({ ...formData, triedTitle: true, triedDescription: true });
     }
+
+    // const lng = e.lngLat[0];
+    //       const lat = e.lngLat[1];
+
+    //       const head = { 
+    //         headers: {
+    //         "Content-Type": "application/json",
+    //         }
+    //       };
+
+    //       const body = {
+    //         "longitude" : lng,
+    //         "latitude" : lat,
+    //       };
+
+    //       const result = await axios.post("/api/create-event", body, head)
+    //       console.log(result);
+    //       setDrag({...drag, move:false, lat:lat, lon:lng})
+
+
   }
 
 
     return (
-        <div className="overlayHolder">
-          <ScopedCssBaseline>
-            <Card id="reportCard">
+        <div className="Modal">
+
+            <Card id="reportCard" className="Form">
                 <Typography variant="h4" style={{fontFamily: 'Patua One', marginBottom:15}}>
                     Report An Issue:
                 </Typography>
@@ -100,12 +120,22 @@ const Form = () => {
                   />
                 </Box>
 
-                <ThemeProvider theme={myTheme}>
-                  <Button variant="contained" color="primary" type="submit" id="upload">
-                    Upload Image
-                  </Button>
-                </ThemeProvider>
+              </div>
+            </form>
 
+            <div className="Map">
+              <ReactMapGL
+                {...viewport}
+                mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+                mapStyle="mapbox://styles/mapbox/streets-v11"
+                onViewportChange={(nextViewport) => setViewport(nextViewport)}
+              > 
+                <MarkerItem/>
+              </ReactMapGL> 
+
+            </div>
+
+<<<<<<< HEAD
             <ThemeProvider theme={myTheme}>
               <span
                 onClick={() => global.document.getElementById("input").click()}
@@ -122,12 +152,34 @@ const Form = () => {
             </ThemeProvider>
 
             {"              "}
+=======
+            <br/>
+            
+            <div classNasme="Buttons">
 
-              </div>
-            </form>
+            <ThemeProvider theme={myTheme}>
+                  <Button variant="contained" color="primary" type="submit" id="upload">
+                    Upload Image
+                  </Button>
+                </ThemeProvider>
+>>>>>>> ef6ef12 (markers and form)
+
+                {"     "}
+                
+              <ThemeProvider theme={myTheme}>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      type="submit"
+                      id="next"
+               >
+                 Submit
+                </Button>
+              </ThemeProvider>
+            </div>
             </Card>
-
-          </ScopedCssBaseline>
+            
+         
         </div>
 
 
@@ -137,9 +189,12 @@ const Form = () => {
 export default Form;
 
 
+<<<<<<< HEAD
 {/* <ReactMapGL
           {...viewport}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
           mapStyle="mapbox://styles/mapbox/streets-v11"
           onViewportChange={(nextViewport) => setViewport(nextViewport)}
           /> */}
+=======
+>>>>>>> ef6ef12 (markers and form)

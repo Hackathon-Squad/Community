@@ -18,7 +18,7 @@ const CardModal = (props) => {
 
     return(
         <div>
-            <Modal open={show} onClose={onButton}>
+            <Modal open={show} onClose={onButton} style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
               <Form/>
             </Modal>
         </div>

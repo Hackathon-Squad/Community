@@ -19,25 +19,25 @@ const MarkerItem = (props) => {
         // ), [props.data]);
         // {markers}
 
-        const handleDragEnd = async (event) => {
-          const lng = event.lngLat[0];
-          const lat = event.lngLat[1];
+        // const handleDragEnd = async (event) => {
+        //   const lng = event.lngLat[0];
+        //   const lat = event.lngLat[1];
 
-          const head = { 
-            headers: {
-            "Content-Type": "application/json",
-            }
-          };
+        //   const head = { 
+        //     headers: {
+        //     "Content-Type": "application/json",
+        //     }
+        //   };
 
-          const body = {
-            "longitude" : lng,
-            "latitude" : lat,
-          };
+        //   const body = {
+        //     "longitude" : lng,
+        //     "latitude" : lat,
+        //   };
 
-          const result = await axios.post("/api/create-event", body, head)
-          console.log(result);
-          setDrag({...drag, move:false, lat:lat, lon:lng})
-        };
+        //   const result = await axios.post("/api/create-event", body, head)
+        //   console.log(result);
+        //   setDrag({...drag, move:false, lat:lat, lon:lng})
+        // };
 
     return (
         <Marker latitude={drag.lat} longitude={drag.lon} 
