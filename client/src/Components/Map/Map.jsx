@@ -33,15 +33,6 @@ const Map = () => {
   };
 
   const handleClick = (e) => {
-    setDisplayPopup(true);
-    setDisplayPopup({
-      display: true,
-      latitude: e.coordinates.latitude,
-      longitude: e.coordinates.longitude,
-      imageURL: e.imageURL,
-      title: e.title,
-      description: e.description,
-    });
     setViewport({
       ...viewport,
       longitude: e.coordinates.longitude,
@@ -51,6 +42,14 @@ const Map = () => {
       transitionInterpolator: new FlyToInterpolator(),
       transitionEasing: d3.easeCubicInOut,
     });
+    setDisplayPopup({
+      display: true,
+      latitude: e.coordinates.latitude,
+      longitude: e.coordinates.longitude,
+      imageURL: e.imageURL,
+      title: e.title,
+      description: e.description,
+    });
   };
 
   return (
@@ -59,6 +58,11 @@ const Map = () => {
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
       mapStyle="mapbox://styles/mapbox/streets-v11"
       onViewportChange={(nextViewport) => setViewport(nextViewport)}
+      onMouseDown={() => {
+        if (displayPopup.display) {
+          setDisplayPopup({ ...displayPopup, display: false });
+        }
+      }}
     >
       {markers &&
         markers.map((city) => (
@@ -67,7 +71,7 @@ const Map = () => {
             latitude={city.coordinates.latitude}
             onClick={() => handleClick(city)}
           >
-            <img src={img} />
+            <img src={img} className="pin" />
           </Marker>
         ))}
       {displayPopup.display && (
@@ -93,8 +97,8 @@ const Map = () => {
           <div>{displayPopup.title}</div>
           <div>{displayPopup.description}</div>
           <img
-            src="https://storage.googleapis.com/community-post-images/2a911e90-3580-4bd4-b050-25fd5f53d247"
-            style={{ objectFit: "contain", width: 500 }}
+            src={displayPopup.imageURL}
+            style={{ objectFit: "contain", width: 300 }}
             className="pin"
           />
         </Popup>
