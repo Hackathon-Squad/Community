@@ -1,19 +1,25 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import ReactMapGL, { Marker, FlyToInterpolator, Popup,  GeolocateControl } from "react-map-gl";
+import ReactMapGL, {
+  Marker,
+  FlyToInterpolator,
+  Popup,
+  GeolocateControl,
+} from "react-map-gl";
 import axios from "axios";
 import img from "../../graphics/redpin.svg";
 import * as d3 from "d3";
-import "./map.css"; 
+import "./map.css";
+import { usePin, usePinUpdate } from "../../PinContext.js";
 
-const geolocateControlStyle= {
+const geolocateControlStyle = {
   right: 10,
-  top: 10
+  top: 10,
 };
 
-
-
 const Map = () => {
+  const pinnedEvent = usePin();
+  const setPinnedEvent = usePinUpdate();
   const [viewport, setViewport] = useState({
     width: "100vw",
     height: "100vh",
@@ -59,6 +65,38 @@ const Map = () => {
     });
   };
 
+  useEffect(() => {
+    if (markers !== null) {
+      handleZoom(pinnedEvent);
+    }
+  }, [pinnedEvent]);
+
+  const handleZoom = (id) => {
+    let designatedPin = null;
+    markers.forEach((map) => {
+      if (map.id === id) {
+        designatedPin = map;
+      }
+    });
+    setViewport({
+      ...viewport,
+      longitude: designatedPin.coordinates.longitude,
+      latitude: designatedPin.coordinates.latitude,
+      zoom: 16,
+      transitionDuration: 4000,
+      transitionInterpolator: new FlyToInterpolator(),
+      transitionEasing: d3.easeCubicInOut,
+    });
+    setDisplayPopup({
+      display: true,
+      latitude: designatedPin.coordinates.latitude,
+      longitude: designatedPin.coordinates.longitude,
+      imageURL: designatedPin.imageURL,
+      title: designatedPin.title,
+      description: designatedPin.description,
+    });
+  };
+
   return (
     <ReactMapGL
       {...viewport}
@@ -100,22 +138,22 @@ const Map = () => {
           anchor="bottom"
           offsetLeft={10}
           tipSize={10}
-        > 
-        <div className="popup-container"> 
-          <div id="popuptitle">{displayPopup.title}</div>
-          <div id="popupdescription">{displayPopup.description}</div>
-          <img
-            src={displayPopup.imageURL}
-            className="pin-style"
-            padding-bottom="20px"
-          />
+        >
+          <div className="popup-container">
+            <div id="popuptitle">{displayPopup.title}</div>
+            <div id="popupdescription">{displayPopup.description}</div>
+            <img
+              src={displayPopup.imageURL}
+              className="pin-style"
+              padding-bottom="20px"
+            />
           </div>
         </Popup>
       )}
 
       <GeolocateControl
         style={geolocateControlStyle}
-        positionOptions={{enableHighAccuracy: true}}
+        positionOptions={{ enableHighAccuracy: true }}
         trackUserLocation={false}
         showAccuracyCircle={true}
         auto={false}
