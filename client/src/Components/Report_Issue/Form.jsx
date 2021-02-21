@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import Card from "@material-ui/core/Card";
-import { Typography } from "@material-ui/core";
+import React, {useState} from 'react';
+import Card from '@material-ui/core/Card';
+import { Typography } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Box from "@material-ui/core/Box";
@@ -23,6 +24,7 @@ const Form = ({ show, setShow }) => {
     description: "",
     triedTitle: false,
     triedDescription: false,
+    finishedFile: false,
     imgURL: "",
     type: "",
   });
@@ -42,6 +44,7 @@ const Form = ({ show, setShow }) => {
     triedDescription,
     type,
     imgURL,
+    finishedFile,
   } = formData;
 
   const uploadFile = async (fileData) => {
@@ -54,8 +57,8 @@ const Form = ({ show, setShow }) => {
     const formData2 = new FormData();
     formData2.append("image", fileData);
     const result = await axios.post("/api/upload", formData2, config);
-    setFileName("Uploaded: " + fileData.name);
-    setFormData({ ...formData, imgURL: result.data.url });
+    setFileName("Uploaded: "+fileData.name);
+    setFormData({...formData, imgURL: result.data.url, finishedFile: true});
   };
 
   const titleTried = () => {
@@ -102,6 +105,7 @@ const Form = ({ show, setShow }) => {
       newItem.resolved = 0;
       await axios.post("/api/create-event", newItem, config);
       setUploadedFile(false);
+      setFormData({ ...formData, finishedFile: false });
       setFileName("");
     } else {
       setFormData({ ...formData, triedTitle: true, triedDescription: true });
@@ -162,7 +166,7 @@ const Form = ({ show, setShow }) => {
 
           <div className="Buttons">
             {uploadedFile ? (
-              <Typography variant="h7">{fileName}</Typography>
+              (finishedFile ? <Typography variant="h7">{fileName}</Typography> : <CircularProgress />)
             ) : (
               <ThemeProvider theme={myTheme}>
                 <input
