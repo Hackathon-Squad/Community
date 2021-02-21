@@ -6,7 +6,12 @@ import './form.css';
 const CardModal = (props) => {
 
     const [temp, setTemp ] = useState(false);
-    const onButton = () => setTemp(!temp);
+    const onButton = () => {
+        
+        setTemp(!temp);
+        console.log("temp : ");
+        console.log(temp);
+    }
 
     const { show, setShow } = props;
 
@@ -19,7 +24,7 @@ const CardModal = (props) => {
     return(
         <div>
             <Modal open={show} onClose={onButton} style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
-              <Form/>
+              <Form temp={temp} setTemp={setTemp}/>
             </Modal>
         </div>
     );

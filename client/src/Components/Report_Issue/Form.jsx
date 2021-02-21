@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '@material-ui/core/Card';
 import { Typography } from '@material-ui/core';
 import Button from "@material-ui/core/Button";
@@ -16,7 +16,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { v4 as uuidv4 } from 'uuid';
 
-const Form = () => {
+const Form = (props) => {
   const [uploadedFile, setUploadedFile] = useState(false);
   const [fileName, setFileName] = useState("");
   const history = useHistory();
@@ -45,6 +45,16 @@ const Form = () => {
     type,
     imgURL,
   } = formData;
+
+  const [hide, setHide ] = useState(true);
+  const onButton = () => setHide(!hide);
+
+  const { temp, setTemp } = props;
+
+  useEffect(() =>
+  setTemp(false),
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  [temp])
 
   const uploadFile = async (fileData) => {
     console.log(title);
@@ -97,7 +107,6 @@ const Form = () => {
     };
     if (checkTitle() && checkDescription()) {
       console.log("Cleared to submit");
-      //history.push("/form2");
       const newItem = {};
       newItem.id =  uuidv4();
       newItem.title = title;
@@ -114,25 +123,9 @@ const Form = () => {
     } else {
       setFormData({ ...formData, triedTitle: true, triedDescription: true });
     }
-
-    // const lng = e.lngLat[0];
-    //       const lat = e.lngLat[1];
-
-    //       const head = { 
-    //         headers: {
-    //         "Content-Type": "application/json",
-    //         }
-    //       };
-
-    //       const body = {
-    //         "longitude" : lng,
-    //         "latitude" : lat,
-    //       };
-
-    //       const result = await axios.post("/api/create-event", body, head)
-    //       console.log(result);
-    //       setDrag({...drag, move:false, lat:lat, lon:lng})
-
+    onButton();
+    console.log("hi:");
+    console.log(hide);
 
   }
 
@@ -252,10 +245,3 @@ const Form = () => {
 
 export default Form;
 
-
-{/* <ReactMapGL
-          {...viewport}
-          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-          mapStyle="mapbox://styles/mapbox/streets-v11"
-          onViewportChange={(nextViewport) => setViewport(nextViewport)}
-          /> */}
