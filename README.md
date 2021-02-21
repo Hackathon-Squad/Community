@@ -1,7 +1,7 @@
 # Community 
 
 ## Background
-Every community across the world will undoubtedly face times of hardship, whether it be natural disasters, the collapse of infrastructure, as well as public disturbances. With the COVID-19 pandemic harming many people's day-to-day lives, another burden has been added on the communities of the world as they continue to confront local issues while struggling to maintain a healthy lifestyle. In particular, the recent snowstorms and subsequent power outages in Texas made us think about how communities of people may be isolated from each other, potentially unaware of not only local disturbances and issues, but solutions to these disturbances, such as vaccination centers and food services. With **Community**, we strove to build an app that would help urban communities connect and thrive. 
+Every community across the world will undoubtedly face times of hardship, whether it be natural disasters, the collapse of infrastructure, or public disturbances. With the COVID-19 pandemic harming many people's day-to-day lives, another burden has been added on the communities of the world as they continue to confront local issues while struggling to maintain a healthy lifestyle. In particular, the recent snowstorms and subsequent power outages in Texas made us think about how communities of people may be isolated from each other, potentially unaware of not only local disturbances and issues, but solutions to these disturbances, such as vaccination centers and food services. With **Community**, we strove to build an app that would help urban communities connect and thrive. 
 
 
 ## What it does
