@@ -23,8 +23,10 @@
     position: absolute;
     padding: 20px;
     left: -160px;
-    top: 75vh;
+    top: 80vh;
     margin: 30px;
+    height: 10%;
+
 }
 
 #doneReportingButton {
