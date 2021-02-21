@@ -50,6 +50,13 @@
 
 .Buttons {
     order: 3;
-    padding: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     align-self: flex-end;
+    display: flex;
+    justify-content: space-between;
+}
+
+.typeInput {
+    display: flex;
 }

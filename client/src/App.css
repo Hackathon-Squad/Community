@@ -8,17 +8,26 @@ hr.dividerColor {
 
 .overlayHolder {
   position: relative;
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
   width: 0;
 }
 
 #imgDiv {
-  background-color: #89D94A;
+  background-color: #89d94a;
 }
 
 #thumbsUp {
   float: right;
   display: flex;
-  align-items:'right';
+  align-items: "right";
   justify-content: flex-end;
+}
+
+.pin {
+  user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }

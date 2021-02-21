@@ -7,22 +7,26 @@ import Box from "@material-ui/core/Box";
 import { ThemeProvider } from '@material-ui/core/styles';
 import myTheme from './MyTheme';
 import {useHistory} from 'react-router-dom';
-import { Email } from '@material-ui/icons';
 import ReactMapGL from "react-map-gl";
 import './form.css';
 import MarkerItem from '../Map/Markers';
 import axios from 'axios';
-
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import { v4 as uuidv4 } from 'uuid';
 
 const Form = () => {
-
-
+  const [uploadedFile, setUploadedFile] = useState(false);
+  const [fileName, setFileName] = useState("");
   const history = useHistory();
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     triedTitle: false,
     triedDescription: false,
+    imgURL: "",
+    type: "",
   });
 
   const [viewport, setViewport] = useState({
@@ -38,19 +42,27 @@ const Form = () => {
     description,
     triedTitle,
     triedDescription,
+    type,
+    imgURL,
   } = formData;
 
   const uploadFile = async (fileData) => {
+    console.log(title);
+    setUploadedFile(true);
     const config = {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     };
-    const formData = new FormData();
-    formData.append("image", fileData);
-    const result = await axios.post("/api/upload", formData, config);
+    const formData2 = new FormData();
+    formData2.append("image", fileData);
+    const result = await axios.post("/api/upload", formData2, config);
+    setFileName("Uploaded: "+fileData.name);
+    console.log(title);
+    setFormData({...formData, imgURL: result.data.url});
     //url for image is in result.data
     //need to add it to the object when uploading post to the db
+    console.log(title);
   };
  
   const titleTried = () => {
@@ -65,16 +77,40 @@ const Form = () => {
   const onChangeDescription = (e) => {
     setFormData({ ...formData, description: e.target.value });
   };
+  const onChangeType = (e) => {
+    setFormData({ ...formData, type: e.target.value });
+  };
   const checkTitle = () => {
-    return title.length > 0;
+    console.log(title);
+    return title && title.length > 0;
   };
   const checkDescription = () => {
-    return description.length > 0;
+    return description && description.length > 0;
   };
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    console.log("Trying to submit");
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
     if (checkTitle() && checkDescription()) {
-      history.push("/form2");
+      console.log("Cleared to submit");
+      //history.push("/form2");
+      const newItem = {};
+      newItem.id =  uuidv4();
+      newItem.title = title;
+      newItem.description = description;
+      newItem.coordinates = { latitude: viewport.latitude, longitude: viewport.longitude };
+      newItem.type = type;
+      newItem.imageURL = imgURL;
+      newItem.upvotes = 0;
+      newItem.resolved = 0;
+      console.log(newItem);
+      const result2 = await axios.post("/api/create-event", newItem, config);
+      setUploadedFile(false);
+      setFileName("");
     } else {
       setFormData({ ...formData, triedTitle: true, triedDescription: true });
     }
@@ -102,20 +138,20 @@ const Form = () => {
 
     return (
         <div className="Modal">
-
             <Card id="reportCard" className="Form">
                 <Typography variant="h4" style={{fontFamily: 'Patua One', marginBottom:15}}>
-                    Report An Issue:
+                    New Report:
                 </Typography>
                 <form noValidate autoComplete="off" onSubmit={onSubmit}>
               <div id="form-inputs">
                 <Box pb={1.87} width="100%">
                   <TextField
                     id="title"
+                    value={title}
                     required
                     label="Title"
                     variant="outlined"
-                    onChange={onChangeTitle}
+                    onChange={(e) => onChangeTitle(e)}
                     error={!checkTitle() && triedTitle}
                     onBlur={titleTried}
                     fullWidth={true}
@@ -127,7 +163,7 @@ const Form = () => {
                     required
                     label="Description"
                     variant="outlined"
-                    onChange={onChangeDescription}
+                    onChange={(e) => onChangeDescription(e)}
                     onBlur={descriptionTried}
                     error={!checkDescription() && triedDescription}
                     fullWidth={true}
@@ -135,8 +171,7 @@ const Form = () => {
                 </Box>
 
               </div>
-            </form>
-
+    
             <div className="Map">
               <ReactMapGL
                 {...viewport}
@@ -152,28 +187,27 @@ const Form = () => {
             <br/>
             
             <div className="Buttons">
-
-            <ThemeProvider theme={myTheme}>
-            <input
-              id="input"
-              name="image"
-              type="file"
-              hidden
-              onChange={(result) => uploadFile(result.target.files[0])}
-            />
-            <span
-                onClick={() => global.document.getElementById("input").click()}
-              >
-                <Button
-                  variant="contained"
-                  color="primary"
-                  type="submit"
-                  id="upload"
+              { uploadedFile ? <Typography variant="h7">{fileName}</Typography> : <ThemeProvider theme={myTheme}>
+              <input
+                id="input"
+                name="image"
+                type="file"
+                hidden
+                onChange={(result) => uploadFile(result.target.files[0])}
+              />
+              <span
+                  onClick={() => global.document.getElementById("input").click()}
                 >
-                  Upload Image
-                </Button>
-              </span>
-                </ThemeProvider>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    id="upload"
+                  >
+                    Upload Image
+                  </Button>
+                </span>
+                </ThemeProvider> }
+            
 
                 {"     "}
                 
@@ -187,7 +221,26 @@ const Form = () => {
                  Submit
                 </Button>
               </ThemeProvider>
-            </div>
+              </div>
+              { uploadedFile ?
+              <div className="typeInput">
+              <Typography variant="h6">Type: </Typography>
+              <FormControl>
+                  <Select
+                    value={formData.type}
+                    onChange={onChangeType}
+                    displayEmpty
+                  >
+                  <MenuItem value="Natural Disasters">Natural Disasters</MenuItem>
+                  <MenuItem value="Public Disturbances">Public Disturbances</MenuItem>
+                  <MenuItem value="Vaccination Centers">Vaccination Centers</MenuItem>
+                  <MenuItem value="Food Services">Food Services</MenuItem>
+                </Select>
+              </FormControl>
+              </div>
+           : 
+           <div></div>}
+          </form>
             </Card>
             
          
