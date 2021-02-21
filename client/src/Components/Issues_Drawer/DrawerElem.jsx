@@ -10,7 +10,7 @@ export default function DrawerElem({title, id, likes, type, addUpvote}) {
         <ListItem button className="drawerElement">
           <div style={{display:'flex', justifyContent:'space-between', width:'100%'}}>
                 <div style={{display:'flex',flexDirection:'column'}}>
-                    <ListItemText>Issue: {title}</ListItemText>
+                    <ListItemText>Title: {title}</ListItemText>
                     <ListItemText >Type: {type}</ListItemText>
                 </div>
                 <div>
