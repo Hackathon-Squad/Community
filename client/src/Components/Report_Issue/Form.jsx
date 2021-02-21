@@ -140,7 +140,7 @@ const Form = () => {
         <div className="Modal">
             <Card id="reportCard" className="Form">
                 <Typography variant="h4" style={{fontFamily: 'Patua One', marginBottom:15}}>
-                    Report An Issue:
+                    New Report:
                 </Typography>
                 <form noValidate autoComplete="off" onSubmit={onSubmit}>
               <div id="form-inputs">
