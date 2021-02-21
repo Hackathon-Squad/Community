@@ -17,7 +17,7 @@ const geolocateControlStyle = {
   top: 10,
 };
 
-const Map = () => {
+const Map = ({ show, setShow }) => {
   const pinnedEvent = usePin();
   const setPinnedEvent = usePinUpdate();
   const [viewport, setViewport] = useState({
@@ -28,7 +28,7 @@ const Map = () => {
     zoom: 12,
   });
 
-  useEffect(() => loadEvents(), []);
+  useEffect(() => loadEvents(), [show]);
 
   const [markers, setMarkers] = useState(null);
   const [displayPopup, setDisplayPopup] = useState({
@@ -66,7 +66,7 @@ const Map = () => {
   };
 
   useEffect(() => {
-    if (markers !== null) {
+    if (markers !== null && pinnedEvent !== null) {
       handleZoom(pinnedEvent);
     }
   }, [pinnedEvent]);
@@ -78,23 +78,25 @@ const Map = () => {
         designatedPin = map;
       }
     });
-    setViewport({
-      ...viewport,
-      longitude: designatedPin.coordinates.longitude,
-      latitude: designatedPin.coordinates.latitude,
-      zoom: 16,
-      transitionDuration: 4000,
-      transitionInterpolator: new FlyToInterpolator(),
-      transitionEasing: d3.easeCubicInOut,
-    });
-    setDisplayPopup({
-      display: true,
-      latitude: designatedPin.coordinates.latitude,
-      longitude: designatedPin.coordinates.longitude,
-      imageURL: designatedPin.imageURL,
-      title: designatedPin.title,
-      description: designatedPin.description,
-    });
+    if (designatedPin !== null) {
+      setViewport({
+        ...viewport,
+        longitude: designatedPin.coordinates.longitude,
+        latitude: designatedPin.coordinates.latitude,
+        zoom: 16,
+        transitionDuration: 3000,
+        transitionInterpolator: new FlyToInterpolator(),
+        transitionEasing: d3.easeCubicInOut,
+      });
+      setDisplayPopup({
+        display: true,
+        latitude: designatedPin.coordinates.latitude,
+        longitude: designatedPin.coordinates.longitude,
+        imageURL: designatedPin.imageURL,
+        title: designatedPin.title,
+        description: designatedPin.description,
+      });
+    }
   };
 
   return (

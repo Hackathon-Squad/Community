@@ -7,7 +7,6 @@ const bucket = storage.bucket("community-post-images");
 const { v4: uuidv4 } = require("uuid");
 
 router.post("/", async (req, res) => {
-  console.log(req.files);
   let uploadedFile = req.files.image.data;
   const name = uuidv4();
   const file = bucket.file(name);
