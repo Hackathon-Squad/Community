@@ -4,7 +4,7 @@ import ReactMapGL, { Marker, FlyToInterpolator, Popup,  GeolocateControl } from 
 import axios from "axios";
 import img from "../../graphics/redpin.svg";
 import * as d3 from "d3";
-import "../../App.css";
+import "./map.css"; 
 
 const geolocateControlStyle= {
   right: 10,
@@ -100,14 +100,16 @@ const Map = () => {
           anchor="bottom"
           offsetLeft={10}
           tipSize={10}
-        >
-          <div>{displayPopup.title}</div>
-          <div>{displayPopup.description}</div>
+        > 
+        <div className="popup-container"> 
+          <div id="popuptitle">{displayPopup.title}</div>
+          <div id="popupdescription">{displayPopup.description}</div>
           <img
             src={displayPopup.imageURL}
-            style={{ objectFit: "contain", width: 300 }}
-            className="pin"
+            className="pin-style"
+            padding-bottom="20px"
           />
+          </div>
         </Popup>
       )}
 
