@@ -5,8 +5,7 @@ import './issuedrawer.css';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import IconButton from '@material-ui/core/IconButton';
 
-
-export default function DrawerElem({title,location, likes, type}) {
+export default function DrawerElem({title, id, likes, type, addUpvote}) {
     return (
         <ListItem button className="drawerElement">
           <div style={{display:'flex', justifyContent:'space-between', width:'100%'}}>
@@ -15,7 +14,7 @@ export default function DrawerElem({title,location, likes, type}) {
                     <ListItemText >Type: {type}</ListItemText>
                 </div>
                 <div>
-                    <IconButton>
+                    <IconButton onClick={() => addUpvote(id)}>
                       <ThumbUpIcon id="thumbsUp" />
                       <ListItemText>&nbsp;&nbsp;{likes}</ListItemText>
                     </IconButton>
