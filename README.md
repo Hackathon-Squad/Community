@@ -103,4 +103,4 @@ Run `npm install` in both the root and client folders. Then return to the root f
 ## License
 The MIT License (MIT)
 
-Copyright (c) 2021 Advay Anish Melody Nishant
+Copyright (c) 2021 Advay, Anish, Melody, Nishant
