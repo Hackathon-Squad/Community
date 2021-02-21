@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function IssuesDrawer() {
+export default function IssuesDrawer({ show, setShow }) {
   const pinnedEvent = usePin();
   const setPinnedEvent = usePinUpdate();
   const scrollTo = (id) => {
@@ -59,15 +59,18 @@ export default function IssuesDrawer() {
     upvotes: 0,
     resolved: 0,
   };
+
   const classes = useStyles();
   const loadEvents = async () => {
     const result = await axios.get("/api/posts");
     setIssuesData(result.data);
     result.data.sort((a, b) => b.upvotes - a.upvotes);
   };
+
   useEffect(() => {
     loadEvents();
-  }, []);
+  }, [show]);
+
   const [issuesData, setIssuesData] = useState(null);
   const [filter, setFilter] = useState({
     type: "All",

@@ -7,14 +7,7 @@ const CardModal = ({ show, setShow }) => {
   const [temp, setTemp] = useState(false);
   const onButton = () => {
     setTemp(!temp);
-    console.log("temp : ");
-    console.log(temp);
   };
-
-  // useEffect(() =>
-  // setShow(false),
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // [temp])
 
   return (
     <div>

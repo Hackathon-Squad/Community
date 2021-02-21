@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Card from "@material-ui/core/Card";
 import { Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
@@ -6,7 +6,6 @@ import TextField from "@material-ui/core/TextField";
 import Box from "@material-ui/core/Box";
 import { ThemeProvider } from "@material-ui/core/styles";
 import myTheme from "./MyTheme";
-import { useHistory } from "react-router-dom";
 import ReactMapGL from "react-map-gl";
 import "./form.css";
 import MarkerItem from "../Map/Markers";
@@ -19,7 +18,6 @@ import { v4 as uuidv4 } from "uuid";
 const Form = ({ show, setShow }) => {
   const [uploadedFile, setUploadedFile] = useState(false);
   const [fileName, setFileName] = useState("");
-  const history = useHistory();
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -46,17 +44,7 @@ const Form = ({ show, setShow }) => {
     imgURL,
   } = formData;
 
-  const [hide, setHide] = useState(true);
-  const onButton = () => setHide(!hide);
-
-  // useEffect(
-  //   () => setTemp(false),
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   [temp]
-  // );
-
   const uploadFile = async (fileData) => {
-    console.log(title);
     setUploadedFile(true);
     const config = {
       headers: {
@@ -67,11 +55,7 @@ const Form = ({ show, setShow }) => {
     formData2.append("image", fileData);
     const result = await axios.post("/api/upload", formData2, config);
     setFileName("Uploaded: " + fileData.name);
-    console.log(title);
     setFormData({ ...formData, imgURL: result.data.url });
-    //url for image is in result.data
-    //need to add it to the object when uploading post to the db
-    console.log(title);
   };
 
   const titleTried = () => {
@@ -98,14 +82,12 @@ const Form = ({ show, setShow }) => {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log("Trying to submit");
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
     };
     if (checkTitle() && checkDescription()) {
-      console.log("Cleared to submit");
       const newItem = {};
       newItem.id = uuidv4();
       newItem.title = title;
@@ -118,16 +100,13 @@ const Form = ({ show, setShow }) => {
       newItem.imageURL = imgURL;
       newItem.upvotes = 0;
       newItem.resolved = 0;
-      console.log(newItem);
-      const result2 = await axios.post("/api/create-event", newItem, config);
+      await axios.post("/api/create-event", newItem, config);
       setUploadedFile(false);
       setFileName("");
     } else {
       setFormData({ ...formData, triedTitle: true, triedDescription: true });
     }
     setShow(false);
-    console.log("hi:");
-    console.log(hide);
   };
 
   return (
