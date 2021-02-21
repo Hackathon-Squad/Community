@@ -9,7 +9,9 @@ const { v4: uuidv4 } = require("uuid");
 router.post("/", async (req, res) => {
   console.log(req.files);
   let uploadedFile = req.files.image.data;
-  const file = bucket.file(uuidv4());
+  const name = uuidv4();
+  const file = bucket.file(name);
+  const path = "gs://community-post-images/" + name;
   try {
     await file.save(uploadedFile);
   } catch (error) {
@@ -17,7 +19,8 @@ router.post("/", async (req, res) => {
     res.status(500).send("There was an error");
   }
   const url = file.publicUrl();
-  res.status(200).send(url);
+
+  res.status(200).json({ url, path });
 });
 
 module.exports = router;
