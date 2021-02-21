@@ -1,6 +1,7 @@
 config.env
 /community.json
 app.yaml
+.gcloudignore
 # Logs
 logs
 *.log
