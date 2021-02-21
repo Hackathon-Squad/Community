@@ -1,6 +1,6 @@
 @import '../../App.css';
 
-.IssuesDrawer {
+#IssuesDrawer {
     width: 350px;
 }
   

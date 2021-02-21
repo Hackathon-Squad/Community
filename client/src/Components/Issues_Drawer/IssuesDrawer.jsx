@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
@@ -16,6 +16,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import * as Scroll from 'react-scroll';
+import { Link, Element, Events, animateScroll } from 'react-scroll';
+import { usePin, usePinUpdate } from '../../PinContext.js';
 
 const useStyles = makeStyles((theme) => ({
   drawerPaper: {
@@ -24,6 +27,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function IssuesDrawer() {
+    const pinnedEvent = usePin();
+    const setPinnedEvent = usePinUpdate();
+    const scrollTo = (id) => {
+      setPinnedEvent(id);
+      //console.log("hi");
+      Scroll.scroller.scrollTo(id, {
+        duration: 1500,
+        delay: 100,
+        smooth: true,
+        containerId: 'IssuesDrawerDiv',
+      })
+    }
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -57,6 +72,7 @@ export default function IssuesDrawer() {
         type: "All"
     })
     const updateFilter = (e) => {
+      //setTestNum((testNum) => testNum+1);
       setFilter({...filter, type: e.target.value});
       setIssuesData([...issuesData].sort((a,b) => b.upvotes - a.upvotes));
     }
@@ -69,7 +85,7 @@ export default function IssuesDrawer() {
     }
     return (
         <Drawer
-        className="IssuesDrawer"
+        id="IssuesDrawer"
         variant="permanent"
         classes={{
           paper: classes.drawerPaper,
@@ -106,7 +122,7 @@ export default function IssuesDrawer() {
         <List>
         {issuesData != null ? issuesData.map(item => ( filter.type == "All" || filter.type == item.type ?
           <div>
-          <DrawerElem id={item.id} title={item.title} likes={item.upvotes} type={item.type} addUpvote={respondUpVote}/>
+          <DrawerElem id={item.id} title={item.title} likes={item.upvotes} type={item.type} addUpvote={respondUpVote} scrollTo={scrollTo}/>
           <hr class="dividerColor" />
           </div>
           : <div></div>
