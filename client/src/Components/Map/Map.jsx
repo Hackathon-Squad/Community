@@ -1,10 +1,17 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import ReactMapGL, { Marker, FlyToInterpolator, Popup } from "react-map-gl";
+import ReactMapGL, { Marker, FlyToInterpolator, Popup,  GeolocateControl } from "react-map-gl";
 import axios from "axios";
 import img from "../../graphics/redpin.svg";
 import * as d3 from "d3";
 import "../../App.css";
+
+const geolocateControlStyle= {
+  right: 10,
+  top: 10
+};
+
+
 
 const Map = () => {
   const [viewport, setViewport] = useState({
@@ -103,6 +110,14 @@ const Map = () => {
           />
         </Popup>
       )}
+
+<GeolocateControl
+        style={geolocateControlStyle}
+        positionOptions={{enableHighAccuracy: true}}
+        trackUserLocation={false}
+        showAccuracyCircle={false}
+        auto={false}
+      />
     </ReactMapGL>
   );
 };
