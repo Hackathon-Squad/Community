@@ -111,11 +111,11 @@ const Map = () => {
         </Popup>
       )}
 
-<GeolocateControl
+      <GeolocateControl
         style={geolocateControlStyle}
         positionOptions={{enableHighAccuracy: true}}
         trackUserLocation={false}
-        showAccuracyCircle={false}
+        showAccuracyCircle={true}
         auto={false}
       />
     </ReactMapGL>
