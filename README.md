@@ -99,6 +99,8 @@ GOOGLE_APPLICATION_CREDENTIALS="community.json"
 ### Running
 Run `npm install` in both the root and client folders. Then return to the root folder and run `npm run dev`. The server and client should both start and open in your browser when they are ready. 
 
+**Made for SD Hacks 2021**
+February 19 - 21, 2021
 
 ## License
 The MIT License (MIT)
