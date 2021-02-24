@@ -81,6 +81,20 @@ MapBox was a crucial part of our frontend, as it allowed us to display both our 
 
 The backend server was written in Node.js using Express. Images are saved in Google Cloud Storage and all the post information is stored in Google Cloud Firestore. 
 
+**Schema**
+
+* coordinates
+    * latitude
+    * longitude
+* description
+* id
+* imageURL
+* resolved
+* title
+* type
+* upvotes
+
+
 ## Setup
 ### Mapbox
 
